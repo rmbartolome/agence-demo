@@ -6,12 +6,10 @@ import com.rmbartolome.agence.security.services.WorkersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -22,6 +20,7 @@ public class WorkersController {
 	WorkersService workersService;
 	
 	@PostMapping("/workers/add")
+	@PreAuthorize("hasRole('ADMIN')")
 	private ResponseEntity<Worker> saveWorker (@RequestBody Worker newWorker) {
 		newWorker.setEnabled(true);
 		Worker temporal = workersService.create(newWorker);
@@ -35,12 +34,14 @@ public class WorkersController {
 	}	
 	
 	@GetMapping("/workers")
+	@PreAuthorize("hasRole('ADMIN')")
 	private ResponseEntity<List<Worker>> getWorkers() {
 		  return ResponseEntity.ok(workersService.getAllTrabajadores());
 	}
 
 
 	@DeleteMapping("/workers/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	private ResponseEntity<Worker> deleteWorker(@PathVariable(value = "id") Integer trabajadorId) throws ResourceNotFoundException {
 		Worker temporal = workersService.deleteTrabajador(trabajadorId);
 		return new ResponseEntity<>(temporal, HttpStatus.OK);

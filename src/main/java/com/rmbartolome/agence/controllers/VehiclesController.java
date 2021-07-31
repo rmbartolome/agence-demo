@@ -5,6 +5,7 @@ import com.rmbartolome.agence.security.services.VehiclesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
@@ -17,6 +18,7 @@ public class VehiclesController {
 	VehiclesService vehiculoService;
 	
 	@PostMapping("/vehicles")
+	@PreAuthorize("hasRole('ADMIN')")
 	private ResponseEntity<Vehicle> saveVehiculo (@RequestBody Vehicle vehiculo) {
 		Vehicle temporal = vehiculoService.createVehiculo(vehiculo);
 		
@@ -29,21 +31,17 @@ public class VehiclesController {
 	}
 	
 	@DeleteMapping(path="vehicles/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	private ResponseEntity<Void> deleteVehiculo(@PathVariable("id") Integer vehiculoId) {
 		vehiculoService.deleteVehiculo(vehiculoId);
 		return ResponseEntity.ok().build();
 	}
-	
+
 	@GetMapping("/vehicles")
+	@PreAuthorize("hasRole('ADMIN')")
 	private ResponseEntity<List<Vehicle>> findVehiculos() {
 		  return ResponseEntity.ok(vehiculoService.getAllVehiculos());
 	}
-	
-	//TODO vehiculos retirados
-	/*@GetMapping(path="/retirados")
-	private ResponseEntity<Vehiculo> findVehiculoRetirados() { 
-		  return ResponseEntity.ok(vehiculoService.getVehiculosRetirados());
-	}*/
 	
 
 }

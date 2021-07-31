@@ -10,11 +10,11 @@ import com.rmbartolome.agence.security.services.WorkersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -31,6 +31,7 @@ public class TravelsController {
 	VehiclesService vehiclesService;
 	
 	@PostMapping(path="/travel/{idWorker}/{idVehicle}")
+	@PreAuthorize("hasRole('ADMIN')")
 	private ResponseEntity<Travel> saveViaje(@PathVariable("idWorker") Integer idWorker,@PathVariable("idVehicle") Integer idVehicle)throws ResourceNotFoundException {
 		Worker worker = workerService.findById(idWorker);
 		
@@ -51,6 +52,7 @@ public class TravelsController {
 	}			
 	
 	@DeleteMapping(path="/viagem/{idWorker}/{idVehicle}")
+	@PreAuthorize("hasRole('ADMIN')")
 	private ResponseEntity<Travel> deleteTravel(@PathVariable("idWorker") Integer idWorker,@PathVariable("idVehicle") Integer idVehicle)throws ResourceNotFoundException {
 		Worker worker = workerService.findById(idWorker);
 		Vehicle vehicle = vehiclesService.findById(idVehicle);
@@ -81,6 +83,7 @@ public class TravelsController {
 	
 
 	@GetMapping(path="travel/finish/{month}/{year}")
+	@PreAuthorize("hasRole('ADMIN')")
 	private ResponseEntity<List<Travel>> findTravelsByDate(@PathVariable("month") Integer month,@PathVariable("year") Integer year) {
 
 		LocalDate initial = LocalDate.of(year, month, 01);
