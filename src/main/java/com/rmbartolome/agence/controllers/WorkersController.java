@@ -2,7 +2,7 @@ package com.rmbartolome.agence.controllers;
 
 import com.rmbartolome.agence.exception.ResourceNotFoundException;
 import com.rmbartolome.agence.models.Worker;
-import com.rmbartolome.agence.security.services.WorkersService;
+import com.rmbartolome.agence.services.WorkersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

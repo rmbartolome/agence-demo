@@ -1,7 +1,7 @@
 package com.rmbartolome.agence.controllers;
 
 import com.rmbartolome.agence.models.Vehicle;
-import com.rmbartolome.agence.security.services.VehiclesService;
+import com.rmbartolome.agence.services.VehiclesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
