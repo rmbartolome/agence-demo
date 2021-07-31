@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+
+  db-test:
+    build: ./postgres
+    image: db-test:1.0
+    ports:
+      - 5432:5432
+    networks:
+      - database_network
+    volumes:
+      - database_data_volume:/var/lib/postgresql/data
+
+networks:
+
+  database_network:
+    driver: bridge
+
+volumes:
+  database_data_volume:
