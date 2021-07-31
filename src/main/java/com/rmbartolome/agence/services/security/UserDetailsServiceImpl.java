@@ -1,4 +1,4 @@
-package com.rmbartolome.agence.security.services.security;
+package com.rmbartolome.agence.services.security;
 
 import com.rmbartolome.agence.models.security.User;
 import com.rmbartolome.agence.repository.security.UserRepository;

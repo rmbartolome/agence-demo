@@ -1,7 +1,7 @@
 package com.rmbartolome.agence.config;
 
 import com.rmbartolome.agence.security.jwt.AuthEntryPointJwt;
-import com.rmbartolome.agence.security.services.security.UserDetailsServiceImpl;
+import com.rmbartolome.agence.services.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

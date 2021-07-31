@@ -1,4 +1,4 @@
-package com.rmbartolome.agence.security.services;
+package com.rmbartolome.agence.services;
 
 import com.rmbartolome.agence.exception.ResourceNotFoundException;
 import com.rmbartolome.agence.models.Worker;
