@@ -11,10 +11,10 @@ import java.util.List;
 
 @Service
 public class TravelsService {
-
+	
 	@Autowired
 	TravelRepository travelRepository;
-
+	
 	public Travel create(Travel travel) {
 
 		travel.setStartDate(new Date());

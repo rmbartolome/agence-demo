@@ -2,8 +2,10 @@ package com.rmbartolome.agence;
 
 import com.rmbartolome.agence.models.security.ERole;
 import com.rmbartolome.agence.models.security.Role;
+import com.rmbartolome.agence.models.security.User;
 import com.rmbartolome.agence.payload.request.SignupRequest;
 import com.rmbartolome.agence.repository.security.RoleRepository;
+import com.rmbartolome.agence.repository.security.UserRepository;
 import com.rmbartolome.agence.security.services.security.AuthService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
