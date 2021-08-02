@@ -1,4 +1,4 @@
-package com.rmbartolome.agence.services;
+package com.rmbartolome.agence.security.services;
 
 import com.rmbartolome.agence.models.Travel;
 import com.rmbartolome.agence.repository.TravelRepository;

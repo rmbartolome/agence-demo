@@ -7,7 +7,7 @@ import javax.validation.Valid;
 
 import com.rmbartolome.agence.payload.request.SignupRequest;
 import com.rmbartolome.agence.payload.response.JwtResponse;
-import com.rmbartolome.agence.services.security.AuthService;
+import com.rmbartolome.agence.security.services.security.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rmbartolome.agence.payload.request.LoginRequest;
 import com.rmbartolome.agence.security.jwt.JwtUtils;
-import com.rmbartolome.agence.services.security.UserDetailsImpl;
+import com.rmbartolome.agence.security.services.security.UserDetailsImpl;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController

@@ -1,4 +1,4 @@
-package com.rmbartolome.agence.services;
+package com.rmbartolome.agence.security.services;
 
 import com.rmbartolome.agence.exception.ResourceNotFoundException;
 import com.rmbartolome.agence.models.Vehicle;
@@ -30,16 +30,4 @@ public class VehiclesService {
 		return (Vehicle) vehicleRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Vehicle not found for this id :: " + id));
 	}
-		
-	/*public List<Vehiculo> getVehiculosRetirados() {
-		List<Vehiculo> vehiculosRetirados = new ArrayList<>();
-		List<Viaje> listViaje = viajeRepository.findAll();
-		
-		for (Viaje viaje:listViaje) {
-			vehiculosRetirados.add(viaje.getVehiculoId());
-		}
-		
-		return vehiculosRetirados;
-	}*/
-
 }

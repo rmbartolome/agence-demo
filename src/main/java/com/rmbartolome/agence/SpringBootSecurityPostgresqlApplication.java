@@ -4,7 +4,7 @@ import com.rmbartolome.agence.models.security.ERole;
 import com.rmbartolome.agence.models.security.Role;
 import com.rmbartolome.agence.payload.request.SignupRequest;
 import com.rmbartolome.agence.repository.security.RoleRepository;
-import com.rmbartolome.agence.services.security.AuthService;
+import com.rmbartolome.agence.security.services.security.AuthService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,4 +1,4 @@
-package com.rmbartolome.agence.services.security;
+package com.rmbartolome.agence.security.services.security;
 
 import com.rmbartolome.agence.models.security.ERole;
 import com.rmbartolome.agence.models.security.Role;
