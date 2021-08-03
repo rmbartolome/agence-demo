@@ -1,4 +1,4 @@
-package com.rmbartolome.agence.services;
+package com.rmbartolome.agence.security.services;
 
 import com.rmbartolome.agence.models.Travel;
 import com.rmbartolome.agence.repository.TravelRepository;
@@ -11,12 +11,11 @@ import java.util.List;
 
 @Service
 public class TravelsService {
-
+	
 	@Autowired
 	TravelRepository travelRepository;
-
+	
 	public Travel create(Travel travel) {
-
 		travel.setStartDate(new Date());
 		return travelRepository.save(travel);
 	}

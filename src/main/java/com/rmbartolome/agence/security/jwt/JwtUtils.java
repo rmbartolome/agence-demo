@@ -2,7 +2,7 @@ package com.rmbartolome.agence.security.jwt;
 
 import java.util.Date;
 
-import com.rmbartolome.agence.services.security.UserDetailsImpl;
+import com.rmbartolome.agence.security.services.security.UserDetailsImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

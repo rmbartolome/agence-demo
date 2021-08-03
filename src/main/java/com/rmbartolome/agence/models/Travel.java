@@ -3,7 +3,6 @@ package com.rmbartolome.agence.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -14,7 +13,7 @@ import java.util.Date;
 @JsonIgnoreProperties(value = {"startDate", "finishDate"},
 		allowGetters = true)
 public class Travel {
-
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="id")
@@ -23,15 +22,14 @@ public class Travel {
 	@OneToOne
 	@JoinColumn(name = "worker_id")
 	private Worker usuarioId;
-
+	
 	@OneToOne
 	@JoinColumn(name = "vehicle_id")
 	private Vehicle vehicleId;
 
-	@Column(name="finish_date",nullable=false)
-	@LastModifiedDate
+	@Column(name="finish_date")
 	private Date finishDate;
-
-	@Column(name="start_date",nullable=false)
+		    
+    @Column(name="start_date",nullable=false)
 	private Date startDate;
 }

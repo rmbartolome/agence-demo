@@ -1,7 +1,7 @@
 package com.rmbartolome.agence.config;
 
 import com.rmbartolome.agence.security.jwt.AuthEntryPointJwt;
-import com.rmbartolome.agence.services.security.UserDetailsServiceImpl;
+import com.rmbartolome.agence.security.services.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -19,6 +19,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.beans.factory.annotation.Value;
 
 import com.rmbartolome.agence.security.jwt.AuthTokenFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -67,7 +72,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			http.cors().and().csrf().disable()
 					.exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
 					.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-					.authorizeRequests().antMatchers("/api/auth/**").permitAll()
+					.authorizeRequests().antMatchers("/api/**").permitAll()
+					.antMatchers("/api/workers/**").permitAll()
+					.antMatchers("/api/test/**").permitAll()
 					.anyRequest().authenticated();
 
 			http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);

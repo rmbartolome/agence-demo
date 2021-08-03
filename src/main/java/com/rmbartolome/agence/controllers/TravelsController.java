@@ -4,9 +4,9 @@ import com.rmbartolome.agence.exception.ResourceNotFoundException;
 import com.rmbartolome.agence.models.Travel;
 import com.rmbartolome.agence.models.Vehicle;
 import com.rmbartolome.agence.models.Worker;
-import com.rmbartolome.agence.services.WorkersService;
-import com.rmbartolome.agence.services.VehiclesService;
-import com.rmbartolome.agence.services.TravelsService;
+import com.rmbartolome.agence.security.services.TravelsService;
+import com.rmbartolome.agence.security.services.VehiclesService;
+import com.rmbartolome.agence.security.services.WorkersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,11 +30,11 @@ public class TravelsController {
 	@Autowired
 	VehiclesService vehiclesService;
 	
-	@PostMapping(path="/travel/{idWorker}/{idVehicle}")
+	@PostMapping("/{idWorker}/{idVehicle}")
 	@PreAuthorize("hasRole('ADMIN')")
-	private ResponseEntity<Travel> createTravel(@PathVariable("idWorker") Integer idWorker,@PathVariable("idVehicle") Integer idVehicle)throws ResourceNotFoundException {
+	public ResponseEntity<Travel> saveViaje(@PathVariable("idWorker") Integer idWorker,@PathVariable("idVehicle") Integer idVehicle)throws ResourceNotFoundException {
 		Worker worker = workerService.findById(idWorker);
-
+		
 		Vehicle vehicles = vehiclesService.findById(idVehicle);
 
 		Travel newTravel = new Travel();
@@ -42,17 +42,17 @@ public class TravelsController {
 		newTravel.setVehicleId(vehicles);
 
 		Travel temporal = travelService.create(newTravel);
-
+		
 		try {
 			return ResponseEntity.created(new URI("/api/viaje"+temporal.getId())).body(temporal);
 		} catch(Exception e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
-	}
-
-	@DeleteMapping(path="/viagem/{idWorker}/{idVehicle}")
+	}			
+	
+	@DeleteMapping("/{idWorker}/{idVehicle}")
 	@PreAuthorize("hasRole('ADMIN')")
-	private ResponseEntity<Travel> deleteTravel(@PathVariable("idWorker") Integer idWorker,@PathVariable("idVehicle") Integer idVehicle)throws ResourceNotFoundException {
+	public ResponseEntity<Travel> deleteTravel(@PathVariable("idWorker") Integer idWorker,@PathVariable("idVehicle") Integer idVehicle)throws ResourceNotFoundException {
 		Worker worker = workerService.findById(idWorker);
 		Vehicle vehicle = vehiclesService.findById(idVehicle);
 		Travel temporal = new Travel();
@@ -81,9 +81,9 @@ public class TravelsController {
 	}
 	
 
-	@GetMapping(path="travel/finish/{month}/{year}")
+	@GetMapping("/finish/{month}/{year}")
 	@PreAuthorize("hasRole('ADMIN')")
-	private ResponseEntity<List<Travel>> findTravelsByDate(@PathVariable("month") Integer month,@PathVariable("year") Integer year) {
+	public ResponseEntity<List<Travel>> findTravelsByDate(@PathVariable("month") Integer month,@PathVariable("year") Integer year) {
 
 		LocalDate initial = LocalDate.of(year, month, 01);
 		LocalDate start = initial.withDayOfMonth(1);

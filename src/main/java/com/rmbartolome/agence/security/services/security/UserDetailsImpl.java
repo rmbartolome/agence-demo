@@ -1,4 +1,4 @@
-package com.rmbartolome.agence.services.security;
+package com.rmbartolome.agence.security.services.security;
 
 import java.util.Collection;
 import java.util.List;
