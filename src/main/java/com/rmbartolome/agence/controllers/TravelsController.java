@@ -10,11 +10,11 @@ import com.rmbartolome.agence.security.services.WorkersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -30,8 +30,9 @@ public class TravelsController {
 	@Autowired
 	VehiclesService vehiclesService;
 	
-	@PostMapping(path="/travel/{idWorker}/{idVehicle}")
-	private ResponseEntity<Travel> saveViaje(@PathVariable("idWorker") Integer idWorker,@PathVariable("idVehicle") Integer idVehicle)throws ResourceNotFoundException {
+	@PostMapping("/{idWorker}/{idVehicle}")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Travel> saveViaje(@PathVariable("idWorker") Integer idWorker,@PathVariable("idVehicle") Integer idVehicle)throws ResourceNotFoundException {
 		Worker worker = workerService.findById(idWorker);
 		
 		Vehicle vehicles = vehiclesService.findById(idVehicle);
@@ -49,8 +50,9 @@ public class TravelsController {
 		}
 	}			
 	
-	@DeleteMapping(path="/viagem/{idWorker}/{idVehicle}")
-	private ResponseEntity<Travel> deleteTravel(@PathVariable("idWorker") Integer idWorker,@PathVariable("idVehicle") Integer idVehicle)throws ResourceNotFoundException {
+	@DeleteMapping("/{idWorker}/{idVehicle}")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<Travel> deleteTravel(@PathVariable("idWorker") Integer idWorker,@PathVariable("idVehicle") Integer idVehicle)throws ResourceNotFoundException {
 		Worker worker = workerService.findById(idWorker);
 		Vehicle vehicle = vehiclesService.findById(idVehicle);
 		Travel temporal = new Travel();
@@ -79,8 +81,9 @@ public class TravelsController {
 	}
 	
 
-	@GetMapping(path="travel/finish/{month}/{year}")
-	private ResponseEntity<List<Travel>> findTravelsByDate(@PathVariable("month") Integer month,@PathVariable("year") Integer year) {
+	@GetMapping("/finish/{month}/{year}")
+	@PreAuthorize("hasRole('ADMIN')")
+	public ResponseEntity<List<Travel>> findTravelsByDate(@PathVariable("month") Integer month,@PathVariable("year") Integer year) {
 
 		LocalDate initial = LocalDate.of(year, month, 01);
 		LocalDate start = initial.withDayOfMonth(1);
@@ -88,7 +91,4 @@ public class TravelsController {
 
 		return ResponseEntity.ok(travelService.findTravelsByMonthAndYear(start, end));
 	}
-		
-	
-
 }

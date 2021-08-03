@@ -16,7 +16,6 @@ public class TravelsService {
 	TravelRepository travelRepository;
 	
 	public Travel create(Travel travel) {
-
 		travel.setStartDate(new Date());
 		return travelRepository.save(travel);
 	}

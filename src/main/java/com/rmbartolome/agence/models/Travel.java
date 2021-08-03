@@ -7,6 +7,7 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -29,8 +30,7 @@ public class Travel {
 	@JoinColumn(name = "vehicle_id")
 	private Vehicle vehicleId;
 
-	@Column(name="finish_date",nullable=false)
-	@LastModifiedDate
+	@Column(name="finish_date")
 	private Date finishDate;
 		    
     @Column(name="start_date",nullable=false)

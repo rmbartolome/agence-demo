@@ -31,14 +31,6 @@ public class SpringBootSecurityPostgresqlApplication {
 				Role newAdminRole = new Role();
 				newAdminRole.setName(ERole.ROLE_ADMIN);
 				roleRepository.save(newAdminRole);
-				SignupRequest signupRequest = new SignupRequest();
-				HashSet<String> roles = new HashSet<>();
-				roles.add("admin");
-				signupRequest.setRoles(roles);
-				signupRequest.setEmail("admin@agence.com");
-				signupRequest.setUsername("admin");
-				signupRequest.setPassword("fleetmg@!");
-				authService.signUp(signupRequest);
 			}
 
 			roleDB = roleRepository.findByName(ERole.ROLE_MODERATOR);
@@ -53,6 +45,16 @@ public class SpringBootSecurityPostgresqlApplication {
 				Role newUserRole = new Role();
 				newUserRole.setName(ERole.ROLE_USER);
 				roleRepository.save(newUserRole);
+				SignupRequest signupRequest = new SignupRequest();
+				HashSet<String> roles = new HashSet<>();
+				roles.add("admin");
+				roles.add("user");
+				roles.add("mod");
+				signupRequest.setRoles(roles);
+				signupRequest.setEmail("admin@agence.com");
+				signupRequest.setUsername("admin");
+				signupRequest.setPassword("fleetmg@!");
+				authService.signUp(signupRequest);
 			}
 		};
 	}
